@@ -3,11 +3,11 @@
 	Description: A simple web application that applies the basic concepts of electromagnetics
 	Author: Gervel Giva
 */
-var AXIS = ['x', 'y' , 'z'];
-var VECTORS = ['A', 'B', 'C'];
+//a b c d e f g h i j k
+var AXIS = ['x', 'y' , 'z', 'v', 'u', 'w'];
+var VECTORS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 var DECIMAL_PLACES = 4;
 $(function(){
-	//show("vector-magnitude");
 	generateVectorInput("vector-magnitude", "Get Magnitude");
 	generateVectorInput("unit-vector", "Get Unit Vector");
 	generateVectors("vector-algebra"); 
@@ -22,10 +22,6 @@ $(function(){
 	});
 });
 
-function show(id){
-	$(".topic").hide();
-	$("#" + id).show();
-}
 
 function generateVectorInput(id, title){
 	$("#" + id + " #output").text('');
@@ -73,7 +69,7 @@ function solveVectorAlgebra(id, operation){
 function addVectors(id){
 	var vectors = [];
 	var input_values = [];
-	var vector_inputs = $("#" + id + " .vector_input").size();
+	var vector_inputs = $("#" + id + " #vector_num").val();
 	var components = $("#" + id + " #components").val();
 	for(var j = 0; j < vector_inputs; j++){
 		input_values = getInputValues(id + " #vector_input_" + VECTORS[j]);
@@ -88,13 +84,13 @@ function addVectors(id){
 		}
 		out += (vector_sum[i] > 0 ? (i == 0 ? "" : " + ") : (i == 0 ? "" : " - ")) + vector_sum[i].toFixed(DECIMAL_PLACES) + AXIS[i];
 	}
-	$("#" + id + " #output").text(out);
+	$("#" + id + " #output").html("Vector Sum: <strong>" + out + "</strong>");
 }
 
 function subVectors(id){
 	var vectors = [];
 	var input_values = [];
-	var vector_inputs = $("#" + id + " .vector_input").size();
+	var vector_inputs = $("#" + id + " #vector_num").val();
 	var components = $("#" + id + " #components").val();
 	for(var j = 0; j < vector_inputs; j++){
 		input_values = getInputValues(id + " #vector_input_" + VECTORS[j]);
@@ -113,7 +109,7 @@ function subVectors(id){
 		}
 		out += (vector_sum[i] >= 0 ? (i == 0 ? "" : " + ") : " ") + vector_sum[i].toFixed(DECIMAL_PLACES) + AXIS[i];
 	}
-	$("#" + id + " #output").text(out);
+	$("#" + id + " #output").html("Vector Difference: <strong>" + out + "</strong>");
 }
 
 // out += "<input type='number' id='input" + i + "' class='input' value='0'/>" + AXIS[i] + (i != components-1 ? " + " : "");
@@ -124,7 +120,7 @@ function generateVectors(id){
 	for(var j = 0; j < vectors; j++){
 		out += "<div id='vector_input_"+VECTORS[j]+"' class='row'><div class='input-group input-group-md col-md-1'><button class='btn disabled'>Vector " + VECTORS[j] + "</button></div>";
 		for(var i = 0; i < components; i++){
-			out += "<div class='input-group input-group-md col-md-2'><input type='number' id='input" + i + "' class='input form-control text-right' value='0'/><span class='input-group-addon'>" + AXIS[i] + "</span></div>";
+			out += "<div class='input-group input-group-md col-md-2'><input type='number' id='input" + i + "' class='vector_input input form-control text-right' value='0'/><span class='input-group-addon'>" + AXIS[i] + "</span></div>";
 		}
 		out += "</div><br />";
 	}
@@ -146,7 +142,7 @@ function getInputValues(id){
 function vectorToMagnitude(id){
 	var input_values = getInputValues(id);
 	var magnitude = getMagnitude(input_values);
-	$("#" + id + " #output").text("Magnitude: " + magnitude.toFixed(DECIMAL_PLACES));
+	$("#" + id + " #output").html("Magnitude: <strong>" + magnitude.toFixed(DECIMAL_PLACES) + "</strong>");
 }
 
 function solveUnitVector(id){
@@ -159,7 +155,7 @@ function solveUnitVector(id){
 		component = input_values[i]/magnitude;
 		unit_vector += (component > 0 ? (i == 0 ? "" : " + ") : " - ") + component.toFixed(DECIMAL_PLACES) + AXIS[i];
 	}
-	$("#" + id + " #output").text("Unit Vector: " + unit_vector);
+	$("#" + id + " #output").html("Unit Vector: <strong>" + unit_vector + "</strong>");
 }
 
 
