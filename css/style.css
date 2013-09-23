@@ -1,0 +1,7 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+.topic{ display: none; }
+ul#nav{ list-style-type:none; }
+ul#nav li{ display: inline; }
