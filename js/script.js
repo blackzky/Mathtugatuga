@@ -15,6 +15,7 @@ function show(id){
 
 function generateVectorInput(){
 	var id ="vector-magnitude";
+	$("#" + id + " #output").text('');
 	var components = $("#" + id + " #components").val();
 	var out = "Input: ";
 	for(var i = 0; i < components; i++){
@@ -24,17 +25,26 @@ function generateVectorInput(){
 	$("#" + id + " #input").html(out);
 }
 
-function vectorToMagnitude(){
-	var id = "vector-magnitude";
-	var input_values = [];
-	var inputs = $("#" + id + " .input");
+function getMagnitude(vector){
+	console.log(vector);
+	var components = vector.length;
 	var magnitude = 0;
 	var val = 0;
-	var components = inputs.size();
 	for(var i = 0; i < components; i++){
-		val = Math.pow(parseInt(inputs[i].value), 2);
+		val = Math.pow(vector[i], 2);
 		magnitude += val;
 	}
 	magnitude = Math.pow(magnitude, 1/2);
+	return magnitude;
+}
+function vectorToMagnitude(){
+	var id = "vector-magnitude";
+	var inputs = $("#" + id + " .input");
+	var components = inputs.size();
+	var input_values = [];
+	for(var i = 0; i < components; i++){
+		input_values.push(parseInt(inputs[i].value));
+	}
+	var magnitude = getMagnitude(input_values);
 	$("#" + id + " #output").text("Magnitude: " + magnitude.toFixed(4));
 }
