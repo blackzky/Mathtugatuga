@@ -4,4 +4,4 @@ body{
 }
 .topic{ display: none; }
 ul#nav{ list-style-type:none; }
-ul#nav li{ display: inline; }
+ul#nav li{ display: inline; margin-right: 10px;}

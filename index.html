@@ -9,43 +9,50 @@
     <div id='container'>
       <h1>Welcome to Mathtugatuga!</h1>
       <ul id="nav">
-        <li><a href="javascript: show('vectors');">Vectors</a></li>
-        <li><a href="javascript: show('dot-product');">Dot Product</a></li>
-        <li><a href="javascript: show('cross-product');">Cross Product</a></li>
+        <li><a href="javascript: show('vector-magnitude');">Vector Magnitude</a></li>
+        <li><a href="javascript: show('unit-vector');">Unit Vector</a></li>
+        <li><a href="javascript: show('vector-algebra');">Vector Algebra</a></li>
       </ul>
 
       <div>
         Decimal Places: <input id="d_place" type="number" min="1" value="4" />
       </div>
       
-      <div id="vectors" class="topic">
+      <div id="vectors">
         <h1>Vectors</h1>
-        <div id="vector-magnitude">
+        <div id="vector-magnitude" class="topic">
           <h2>Vector Magnitude</h2>
           <div>
             Components: <input type="number" value="2" min="1" max="3" id="components" /> <br />
             <div id="input"></div>
           </div>
           <p id="output"></p>
+          <hr />
         </div>
-        <hr />
 
-        <div id="unit-vector">
+        <div id="unit-vector" class="topic">
           <h2>Unit Vector</h2>
           <div>
             Components: <input type="number" value="2" min="1" max="3" id="components" /> <br />
             <div id="input"></div>
           </div>
           <p id="output"></p>
+          <hr />
         </div>
-      </div>
 
-      <div id="dot-product" class="topic">
-        <h1>Dot Product</h1>
-      </div>
+        <div id="vector-algebra" class="topic">
+          <h2>Vector Algebra</h2>
+          <div>
+            <div>
+              Vectors: <input type="number" value="2" min="2" max="3" id="vector_num" /> <br />
+              Components: <input type="number" value="2" min="1" max="3" id="components" /> <br />
+              <div id="vectors"></div>
 
-      <div id="cross-product" class="topic">
-        <h1>Cross Product</h1>
+            </div>
+          </div>
+          <p id="output"></p>
+          <hr />
+        </div>
       </div>
     </div>
 
