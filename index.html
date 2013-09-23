@@ -18,6 +18,7 @@
     <div class='container'>
 
 			<div class="jumbotron">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				<div class="container">
 					<h1 class="text-center">Welcome to Mathtugatuga!</h1>
 					<p class="text-center">A simple web application where the basics of Electromagnetics is applied</p>
@@ -79,12 +80,22 @@
 					<div id="collapseThree" class="panel-collapse collapse">
 						<div id="vector-algebra" class="panel-body">
 
-							<div>
-								Vectors: <input type="number" value="2" min="2" max="3" id="vector_num" /> <br />
-								Components: <input type="number" value="2" min="1" max="3" id="components" /> <br />
-								<div id="vectors"></div>
-							</div>
-							<div id="output" class="well"></div>
+
+								<div class="row">
+									<div class="input-group input-group-md col-md-6">
+										<span class="input-group-addon">Vectors</span>
+										<input type="number" class="form-control input-md text-right" value="2" min="2" max="3" id="vector_num" />
+									</div>
+									<div class="input-group input-group-md col-md-6">
+										<span class="input-group-addon">Components</span>
+										<input type="number" class="form-control input-md text-right" value="2" min="1" max="3" id="components" />
+									</div>
+								</div>
+								<div class="row">
+									<div id="vectors" class="container"></div>
+								</div>
+								<hr />
+								<div class="well" id="output"></div>
 
 						</div>
 					</div>
