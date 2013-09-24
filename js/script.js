@@ -12,6 +12,11 @@ $(function(){
 	generateVectorInput("unit-vector", "Get Unit Vector");
 	generateVectors("vector-algebra"); 
 
+	$("#d_place").tooltip("show");
+	setTimeout(function(){$("#d_place").tooltip("hide")}, 5000);
+	$(".cmp").tooltip({title: "Set the components of the input vector"});
+	$(".vct").tooltip({title: "Set the number of vectors [Input]"});
+
 	$("body").on("change", "#d_place", function(){
 		DECIMAL_PLACES = this.value;
 	});
