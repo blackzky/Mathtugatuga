@@ -33,9 +33,9 @@ function generateVectorInput(id, title){
 	var components = $("#" + id + " #components").val();
 	var out = "";
 	for(var i = 0; i < components; i++){
-		out += "<div class='input-group input-group-md col-md-2'><input type='number' id='input" + i + "' class='input form-control text-right' value='0'/><span class='input-group-addon'>" + AXIS[i] + "</span></div>";
+		out += "<div class='input-group input-group-sm col-sm-2'><input type='number' id='input" + i + "' class='input form-control text-right' value='0'/><span class='input-group-addon'>" + AXIS[i] + "</span></div>";
 	}
-	out += "<div class='input-group input-group-md col-md-2'><button class='btn btn-primary' onclick='solve(\"" + id + "\")'>" + title  + "</button></div>";
+	out += "<div class='input-group input-group-sm col-sm-2'><button class='btn btn-primary' onclick='solve(\"" + id + "\")'>" + title  + "</button></div>";
 	$("#" + id + " #input").html(out);
 }
 
@@ -123,9 +123,9 @@ function generateVectors(id){
 	var vectors = $("#" + id + " #vector_num").val();
 	var components = $("#" + id + " #components").val();
 	for(var j = 0; j < vectors; j++){
-		out += "<div id='vector_input_"+VECTORS[j]+"' class='row'><div class='input-group input-group-md col-md-1'><button class='btn disabled'>Vector " + VECTORS[j] + "</button></div>";
+		out += "<div id='vector_input_"+VECTORS[j]+"' class='row'><div class='input-group input-group-sm col-sm-1'><button class='btn disabled'>Vector " + VECTORS[j] + "</button></div>";
 		for(var i = 0; i < components; i++){
-			out += "<div class='input-group input-group-md col-md-2'><input type='number' id='input" + i + "' class='vector_input input form-control text-right' value='0'/><span class='input-group-addon'>" + AXIS[i] + "</span></div>";
+			out += "<div class='input-group input-group-sm col-sm-2'><input type='number' id='input" + i + "' class='vector_input input form-control text-right' value='0'/><span class='input-group-addon'>" + AXIS[i] + "</span></div>";
 		}
 		out += "</div><br />";
 	}
