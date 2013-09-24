@@ -82,7 +82,7 @@ function addVectors(id){
 		for(var j = 0; j < vector_inputs; j++){
 			vector_sum[i] += vectors[j][i];
 		}
-		out += (vector_sum[i] > 0 ? (i == 0 ? "" : " + ") : (i == 0 ? "" : " - ")) + vector_sum[i].toFixed(DECIMAL_PLACES) + AXIS[i];
+		out += (vector_sum[i] >= 0 ? (i == 0 ? "" : " + ") : (i == 0 ? " -" : " - ")) + Math.abs(vector_sum[i].toFixed(DECIMAL_PLACES)) + AXIS[i];
 	}
 	$("#" + id + " #output").html("Vector Sum: <strong>" + out + "</strong>");
 }
@@ -107,7 +107,7 @@ function subVectors(id){
 		for(var j = 0; j < vector_inputs; j++){
 			if(j != 0) vector_sum[i] -= vectors[j][i];
 		}
-		out += (vector_sum[i] >= 0 ? (i == 0 ? "" : " + ") : " ") + vector_sum[i].toFixed(DECIMAL_PLACES) + AXIS[i];
+		out += (vector_sum[i] >= 0 ? (i == 0 ? "" : " + ") : (i == 0 ? " -" : " - ")) + Math.abs(vector_sum[i].toFixed(DECIMAL_PLACES)) + AXIS[i];
 	}
 	$("#" + id + " #output").html("Vector Difference: <strong>" + out + "</strong>");
 }
@@ -153,7 +153,7 @@ function solveUnitVector(id){
 	var component = 0;
 	for(var i = 0; i < components; i++){
 		component = input_values[i]/magnitude;
-		unit_vector += (component > 0 ? (i == 0 ? "" : " + ") : " - ") + component.toFixed(DECIMAL_PLACES) + AXIS[i];
+		unit_vector += (component >= 0 ? (i == 0 ? "" : " + ") : (i == 0 ? " -" : " - ")) + Math.abs(component.toFixed(DECIMAL_PLACES)) + AXIS[i];
 	}
 	$("#" + id + " #output").html("Unit Vector: <strong>" + unit_vector + "</strong>");
 }
