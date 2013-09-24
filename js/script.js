@@ -14,15 +14,22 @@ $(function(){
 
 	$("#d_place").tooltip({placement: "bottom"}).tooltip("show");
 	setTimeout(function(){$("#d_place").tooltip("hide")}, 5000);
-	$(".cmp").tooltip({title: "Set the components of the input vector"});
-	$(".vct").tooltip({title: "Set the number of vectors [Input]"});
+	$(".cmp").tooltip({title: "Set the components of the input vector. [Min: 1, Max: 3]"});
+	$(".vct").tooltip({title: "Set the number of (input) vectors. [Min: 1, Max: 3]"});
 
 	$("body").on("change", "#d_place", function(){
 		DECIMAL_PLACES = this.value;
 	});
-	$("body").on("change", "#vector-magnitude #components", function(){generateVectorInput("vector-magnitude", "Get Magnitude"); });
-	$("body").on("change", "#unit-vector #components", function(){generateVectorInput("unit-vector", "Get Unit Vector"); });
+	$("body").on("change", "#vector-magnitude #components", function(){
+		this.value = (this.value > this.max ? this.max : (this.value < this.min ? this.min : this.value));
+		generateVectorInput("vector-magnitude", "Get Magnitude"); 
+	});
+	$("body").on("change", "#unit-vector #components", function(){
+		this.value = (this.value > this.max ? this.max : (this.value < this.min ? this.min : this.value));
+		generateVectorInput("unit-vector", "Get Unit Vector"); 
+	});
 	$("body").on("change", "#vector-algebra #vector_num, #vector-algebra #components", function(){
+		this.value = (this.value > this.max ? this.max : (this.value < this.min ? this.min : this.value));
 		generateVectors("vector-algebra"); 
 	});
 });
