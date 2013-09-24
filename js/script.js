@@ -12,7 +12,7 @@ $(function(){
 	generateVectorInput("unit-vector", "Get Unit Vector");
 	generateVectors("vector-algebra"); 
 
-	$("#d_place").tooltip("show");
+	$("#d_place").tooltip({placement: "bottom"}).tooltip("show");
 	setTimeout(function(){$("#d_place").tooltip("hide")}, 5000);
 	$(".cmp").tooltip({title: "Set the components of the input vector"});
 	$(".vct").tooltip({title: "Set the number of vectors [Input]"});
