@@ -3,11 +3,23 @@ var VectorData = function(x, y, z){
 	this.y = y || 0;
 	this.z = z || 0;
 	this.toString = function(){
-		var x = this.x;
-		var y = this.y;
-		var z = this.z;
-		var str = x + "x" + (y >= 0 ? " + " : " - ") + Math.abs(y) + "y" + (z >= 0 ? " + " : " - ") + Math.abs(z) + "z";
+		var x = parseFloat(this.x);
+		var y = parseFloat(this.y);
+		var z = parseFloat(this.z);
+		var str = getTerm(x, 0, "x") + getTerm(y, parseFloat(x), "y") + getTerm(z, parseFloat((x+y)+(x*y)), "z");
 		return str;
+	}
+	function getTerm(value, prev, prepend){
+		var term = "";
+		if(value != 0){
+			if(prev == 0){
+				term = (value >= 0 ? "" : " -"); 	
+			}else{
+				term = (value >= 0 ? " + " : " - "); 	
+			}
+			term += Math.abs(value) + prepend;
+		}
+		return term;
 	}
 };
 
