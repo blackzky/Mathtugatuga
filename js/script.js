@@ -7,44 +7,22 @@
 var AXIS = ['x', 'y' , 'z', 'v', 'u', 'w'];
 var VECTORS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 var DECIMAL_PLACES = 4;
+var BUFFER;
+
 $(function(){
-	generateVectorInput("vector-magnitude", "Get Magnitude");
-	generateVectorInput("unit-vector", "Get Unit Vector");
-	generateVectors("vector-algebra"); 
+	BUFFER = new VectorData();
+
+	initModule("vector-magnitude", 1, ["Calculate Magnitude"]);
+	initModule("unit-vector", 1, ["Calculate Unit Vector"]);
+	initModule("vector-algebra", 2, ["Add Vectors", "Subtract Vectors"]);
 
 	$("#d_place").tooltip({placement: "bottom"}).tooltip("show");
 	setTimeout(function(){$("#d_place").tooltip("hide")}, 5000);
-	$(".cmp").tooltip({title: "Set the components of the input vector. [Min: 1, Max: 3]"});
-	$(".vct").tooltip({title: "Set the number of (input) vectors. [Min: 1, Max: 3]"});
 
-	$("body").on("change", "#d_place", function(){
-		DECIMAL_PLACES = this.value;
-	});
-	$("body").on("change", "#vector-magnitude #components", function(){
-		this.value = (this.value > this.max ? this.max : (this.value < this.min ? this.min : this.value));
-		generateVectorInput("vector-magnitude", "Get Magnitude"); 
-	});
-	$("body").on("change", "#unit-vector #components", function(){
-		this.value = (this.value > this.max ? this.max : (this.value < this.min ? this.min : this.value));
-		generateVectorInput("unit-vector", "Get Unit Vector"); 
-	});
-	$("body").on("change", "#vector-algebra #vector_num, #vector-algebra #components", function(){
-		this.value = (this.value > this.max ? this.max : (this.value < this.min ? this.min : this.value));
-		generateVectors("vector-algebra"); 
-	});
+	$("body").on("change", "#d_place", function(){ DECIMAL_PLACES = this.value; });
+
 });
 
-
-function generateVectorInput(id, title){
-	$("#" + id + " #output").text('');
-	var components = $("#" + id + " #components").val();
-	var out = "";
-	for(var i = 0; i < components; i++){
-		out += "<div class='input-group input-group-sm col-sm-2'><input type='number' id='input" + i + "' class='input form-control text-right' value='0'/><span class='input-group-addon'>" + AXIS[i] + "</span></div>";
-	}
-	out += "<div class='input-group input-group-sm col-sm-2'><button class='btn btn-primary' onclick='solve(\"" + id + "\")'>" + title  + "</button></div>";
-	$("#" + id + " #input").html(out);
-}
 
 function solve(mode, operation){
 	switch(mode){
@@ -55,7 +33,13 @@ function solve(mode, operation){
 			solveUnitVector(mode);
 			break;
 		case "vector-algebra":
-			solveVectorAlgebra(mode, operation);
+			if(operation == 0){
+				addVectors(mode);
+			}else if(operation == 1){
+				subVectors(mode);
+			}else{
+				alert("Nope");	
+			}
 			break;
 		default:
 			alert("Nope");	
@@ -64,19 +48,6 @@ function solve(mode, operation){
 
 }
 
-function solveVectorAlgebra(id, operation){
-	switch(operation){
-		case "add":
-			addVectors(id);
-			break;
-		case "sub":
-			subVectors(id);
-			break;
-		default:
-			alert("nope");
-			break;
-	}
-}
 
 function addVectors(id){
 	var vectors = [];
@@ -183,4 +154,55 @@ function getMagnitude(vector){
 	}
 	magnitude = Math.pow(magnitude, 1/2);
 	return magnitude;
+}
+
+/* REFACTORED CODE */
+function initModule(id, size, title){
+	for(var i = 0; i < size; i++){
+		createVectorInputDom(id);
+	}
+	createActionButton(id, title);
+}
+
+function createVectorInputDom(parentID, size){
+	var pdiv = "<div class='input-group input-group-sm col-sm-2'>";
+
+	var vector = "";
+	size = size || 1;
+	for(var i = 0; i < size; i++){
+		vector += "<br /><div class='row vector-input'>";
+		vector += (pdiv + "<input type='number' class='input form-control text-right vector-x' value='0'/><span class='input-group-addon'>x</span></div>");
+		vector += (pdiv + "<input type='number' class='input form-control text-right vector-y' value='0'/><span class='input-group-addon'>y</span></div>");
+		vector += (pdiv + "<input type='number' class='input form-control text-right vector-z' value='0'/><span class='input-group-addon'>z</span></div>");
+		vector += "</div>"; 
+	}
+
+	$("#" + parentID + " .vector-input-parent").append(vector);
+}
+
+function createActionButton(parentID, title){
+	var out = "<br /><div class='row'>";
+	for(var i in title){
+		out += "<div class='input-group input-group-sm col-sm-2'><button class='btn btn-primary' onclick='solve(\"" + parentID + "\", " + i + ")'>" + title[i]  + "</button></div>";	
+	}
+	out += "</div>";
+	$("#" + parentID + " .vector-input-parent").append(out);
+}
+
+function getVectorFromInputDom(domID, index){
+	var vectorDom = $("#" + domID + " .vector-input");
+	var vector = new VectorData();
+	index = index || 0;
+	vector.x = parseFloat( ($(vectorDom[index]).find(".vector-x")).val() ) || 0;
+	vector.y = parseFloat( ($(vectorDom[index]).find(".vector-y")).val() ) || 0;
+	vector.z = parseFloat( ($(vectorDom[index]).find(".vector-z")).val() ) || 0;
+	return vector;
+}
+
+function setVectorOfInputDom(domID, vector, index){
+	var vectorDom = $("#" + domID + " .vector-input");
+	index = index || 0;
+	($(vectorDom[index]).find(".vector-x")).val(vector.x);
+	($(vectorDom[index]).find(".vector-y")).val(vector.y);
+	($(vectorDom[index]).find(".vector-z")).val(vector.z);
 }
