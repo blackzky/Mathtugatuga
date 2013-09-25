@@ -1,5 +1,10 @@
 Mathtugatuga is a simple web application that applies the basic concepts of electromagnetics
 
+v1.02 Released!
+Changelog:
+	- Added copy and paste feature. (Allows user to copy input/output vector and paste it in the input vector)
+	- Removed component options, (Input Vector always have 3 components)
 
-A live version of the app can be found:
+
+A live version of the app can be found here [live version usese v.1.0]:
 http://blackzky.byethost32.com/

@@ -56,11 +56,13 @@ function solve(id, operation){
 }
 
 function setVectorOutput(parentId, vectorR, title){
-	var out = (vectorR.x == "NaN" || vectorR.y == "NaN" || vectorR.z == "NaN") ?  "Error" : vectorR.toString();
-	var out = title + ": <strong>" + out + "</strong>";
-	out += "&nbsp;&nbsp;<button onclick='copy("+vectorR.x+", " + vectorR.y+ ", " + vectorR.z + ")' class='btn btn-info'>Copy</button>";
+	var error = (vectorR.x == "NaN" || vectorR.y == "NaN" || vectorR.z == "NaN");
+	var data = error ?  "<span class='text-danger'>Error</span>" : vectorR.toString();
+	var out = title + ": <strong>" + data + "</strong>";
+	if(!error) out += "&nbsp;&nbsp;<button onclick='copy("+vectorR.x+", " + vectorR.y+ ", " + vectorR.z + ")' class='btn btn-info'>Copy</button>";
 	$("#" + parentId + " .output").html(out);
 }
+
 function copy(x, y, z){
 	BUFFER = new VectorData(x, y, z);
 }
