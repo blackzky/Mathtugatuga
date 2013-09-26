@@ -2,11 +2,14 @@ var VectorData = function(x, y, z){
 	this.x = x || 0;
 	this.y = y || 0;
 	this.z = z || 0;
+	function isZero(x, y, z){
+		return ((x + y + z) == 0);
+	}
 	this.toString = function(){
 		var x = parseFloat(this.x);
 		var y = parseFloat(this.y);
 		var z = parseFloat(this.z);
-		var str = getTerm(x, 0, "x") + getTerm(y, parseFloat(x), "y") + getTerm(z, parseFloat((x+y)+(x*y)), "z");
+		var str = isZero(x, y, z) ? "0" : (getTerm(x, 0, "x") + getTerm(y, parseFloat(x), "y") + getTerm(z, parseFloat((x+y)+(x*y)), "z"));
 		return str;
 	}
 	function getTerm(value, prev, prepend){
