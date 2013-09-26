@@ -76,6 +76,9 @@ function copyFromInputDom(parentId, index){
 function pasteInputDom(parentId, index){
 	setVectorOfInputDom(parentId, BUFFER, index);	
 }
+function resetInputDom(parentId, index){
+	setVectorOfInputDom(parentId, new VectorData(), index);	
+}
 function initModule(id, size, title){
 	createVectorInputDom(id, size);
 	createActionButton(id, title);
@@ -88,10 +91,7 @@ function createVectorInputDom(parentID, size){
 	size = size || 1;
 	for(var i = 0; i < size; i++){
 		vector += "<br /><div class='row vector-input'>";
-		
-		vector += (pdiv1 +"<div class='btn-group'><button type='button' class='btn btn-info dropdown-toggle' data-toggle='dropdown'>Vector " + VECTORS[i] + "&nbsp;<span class='caret'></span></button><ul class='dropdown-menu'><li><a href='javascript: copyFromInputDom(\""+parentID+"\", "+i+");'>Copy</a></li><li><a href='javascript: pasteInputDom(\""+parentID+"\", "+i+");'>Paste</a></li></ul></div></div>");
- 
-
+		vector += (pdiv1 +"<div class='btn-group'><button type='button' class='btn btn-info dropdown-toggle' data-toggle='dropdown'>Vector " + VECTORS[i] + "&nbsp;<span class='caret'></span></button><ul class='dropdown-menu'><li><a href='javascript: copyFromInputDom(\""+parentID+"\", "+i+");'>Copy</a></li><li><a href='javascript: pasteInputDom(\""+parentID+"\", "+i+");'>Paste</a></li><li class='divider'></li><li><a href='javascript: resetInputDom(\""+parentID+"\", "+i+");'>Reset</a></li></ul></div></div>");
 		vector += (pdiv2 + "<input type='number' class='input form-control text-right vector-x' value='0'/><span class='input-group-addon'>x</span></div>");
 		vector += (pdiv2 + "<input type='number' class='input form-control text-right vector-y' value='0'/><span class='input-group-addon'>y</span></div>");
 		vector += (pdiv2 + "<input type='number' class='input form-control text-right vector-z' value='0'/><span class='input-group-addon'>z</span></div>");

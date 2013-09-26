@@ -49,7 +49,6 @@ var Vector = {
 		vectorR.x = (parseFloat(vectorA.x) + parseFloat(vectorB.x)).toFixed(decimal);
 		vectorR.y = (parseFloat(vectorA.y) + parseFloat(vectorB.y)).toFixed(decimal);
 		vectorR.z = (parseFloat(vectorA.z) + parseFloat(vectorB.z)).toFixed(decimal);
-		console.log(vectorR);
 		return vectorR;
 	},
 
@@ -59,7 +58,6 @@ var Vector = {
 		vectorR.x = (parseFloat(vectorA.x) - parseFloat(vectorB.x)).toFixed(decimal);
 		vectorR.y = (parseFloat(vectorA.y) - parseFloat(vectorB.y)).toFixed(decimal);
 		vectorR.z = (parseFloat(vectorA.z) - parseFloat(vectorB.z)).toFixed(decimal);
-		console.log(vectorR);
 		return vectorR;
 	}
 
