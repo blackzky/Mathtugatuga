@@ -17,7 +17,10 @@ $(function(){
 	$("#d_place").tooltip({placement: "bottom"}).tooltip("show");
 	setTimeout(function(){$("#d_place").tooltip("hide")}, 5000);
 
-	$("body").on("change", "#d_place", function(){ DECIMAL_PLACES = this.value; });
+	$("body").on("change", "#d_place", function(){ 
+		this.value = (this.value >= 0 ? this.value : 0);
+		DECIMAL_PLACES = this.value; 
+	});
 
 });
 
@@ -39,10 +42,10 @@ function solve(id, operation){
 			vectorA = getVectorFromInputDom(id, 0);
 			vectorB = getVectorFromInputDom(id, 1);
 			if(operation == 0){
-				vectorR = Vector.Add(vectorA, vectorB);
+				vectorR = Vector.Add(vectorA, vectorB, DECIMAL_PLACES);
 				setVectorOutput(id, vectorR, "Sum");
 			}else if(operation == 1){
-				vectorR = Vector.Sub(vectorA, vectorB);
+				vectorR = Vector.Sub(vectorA, vectorB, DECIMAL_PLACES);
 				setVectorOutput(id, vectorR, "Defference");
 			}else{
 				alert("Something Went Wrong");	

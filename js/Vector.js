@@ -43,19 +43,23 @@ var Vector = {
 		return vector;
 	},
 
-	Add: function(vectorA, vectorB){
+	Add: function(vectorA, vectorB, decimal){
+		decimal = decimal || 6;
 		var vectorR = new VectorData();
-		vectorR.x = vectorA.x + vectorB.x;
-		vectorR.y = vectorA.y + vectorB.y;
-		vectorR.z = vectorA.z + vectorB.z;
+		vectorR.x = (parseFloat(vectorA.x) + parseFloat(vectorB.x)).toFixed(decimal);
+		vectorR.y = (parseFloat(vectorA.y) + parseFloat(vectorB.y)).toFixed(decimal);
+		vectorR.z = (parseFloat(vectorA.z) + parseFloat(vectorB.z)).toFixed(decimal);
+		console.log(vectorR);
 		return vectorR;
 	},
 
-	Sub: function(vectorA, vectorB){
+	Sub: function(vectorA, vectorB, decimal){
+		decimal = decimal || 6;
 		var vectorR = new VectorData();
-		vectorR.x = vectorA.x - vectorB.x;
-		vectorR.y = vectorA.y - vectorB.y;
-		vectorR.z = vectorA.z - vectorB.z;
+		vectorR.x = (parseFloat(vectorA.x) - parseFloat(vectorB.x)).toFixed(decimal);
+		vectorR.y = (parseFloat(vectorA.y) - parseFloat(vectorB.y)).toFixed(decimal);
+		vectorR.z = (parseFloat(vectorA.z) - parseFloat(vectorB.z)).toFixed(decimal);
+		console.log(vectorR);
 		return vectorR;
 	}
 
